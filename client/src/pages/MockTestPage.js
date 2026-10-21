@@ -33,7 +33,10 @@ export default function MockTestPage() {
     return () => clearInterval(id);
   }, [started, finished]);
 
-  const questions = selected?.questions || [];
+  const questions = useMemo(
+  () => selected?.questions || [],
+  [selected?.questions]
+);
   const result = useMemo(() => {
     const correct = answers.filter((a, i) => a === questions[i]?.correctAnswer).length;
     return { correct, total: questions.length, percentage: questions.length ? Math.round(correct / questions.length * 100) : 0 };

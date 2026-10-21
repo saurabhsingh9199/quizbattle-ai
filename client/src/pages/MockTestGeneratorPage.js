@@ -29,7 +29,10 @@ export default function MockTestGeneratorPage() {
   const [seconds, setSeconds] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  const questions = mock?.questions || [];
+  const questions = useMemo(
+  () => mock?.questions || [],
+  [mock?.questions]
+);
   const current = questions[index];
   const answered = answers.filter((x) => x !== undefined).length;
   const score = useMemo(() => {
